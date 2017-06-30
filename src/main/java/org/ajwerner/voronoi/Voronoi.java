@@ -10,9 +10,6 @@ import java.util.TreeSet;
  * Created by ajwerner on 12/23/13.
  */
 public class Voronoi {
-    public static final double MIN_DRAW_DIM = -5;
-    public static final double MAX_DRAW_DIM = 5;
-    // Ghetto but just for drawing stuff
     private static final double MAX_DIM = 10;
     private static final double MIN_DIM = -10;
     private double sweepLoc;
