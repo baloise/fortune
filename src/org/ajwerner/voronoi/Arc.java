@@ -36,16 +36,6 @@ public class Arc extends ArcKey {
         return new Point(Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
     }
 
-    public void draw() {
-        Point l = getLeft();
-        Point r = getRight();
-
-        Parabola par = new Parabola(site, v.getSweepLoc());
-        double min = (l.x == Double.NEGATIVE_INFINITY) ? Voronoi.MIN_DRAW_DIM : l.x;
-        double max = (r.x == Double.POSITIVE_INFINITY) ? Voronoi.MAX_DRAW_DIM : r.x;
-        par.draw(min, max);
-    }
-
     public String toString() {
         Point l = getLeft();
         Point r = getRight();

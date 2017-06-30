@@ -1,9 +1,5 @@
 package org.ajwerner.voronoi;
 
-import edu.princeton.cs.introcs.StdDraw;
-
-import java.awt.*;
-
 /**
  * Created by ajwerner on 12/28/13.
  */
@@ -28,20 +24,6 @@ public class BreakPoint {
 
     private static double sq(double d) {
         return d * d;
-    }
-
-    public void draw() {
-        Point p = this.getPoint();
-        p.draw(Color.BLUE);
-        StdDraw.setPenColor(Color.BLUE);
-        StdDraw.line(edgeBegin.x, edgeBegin.y, p.x, p.y);
-        StdDraw.setPenColor();
-        if (isEdgeLeft && e.p2 != null) {
-            StdDraw.line(edgeBegin.x, edgeBegin.y, e.p2.x, e.p2.y);
-        }
-        else if (!isEdgeLeft && e.p1 != null) {
-            StdDraw.line(edgeBegin.x, edgeBegin.y, e.p1.x, e.p1.y);
-        }
     }
 
     public void finish(Point vert) {
