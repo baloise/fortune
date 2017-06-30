@@ -1,5 +1,8 @@
 package org.ajwerner.voronoi;
 
+import static java.lang.Math.max;
+import static java.lang.Math.min;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Map;
@@ -10,8 +13,8 @@ import java.util.TreeSet;
  * Created by ajwerner on 12/23/13.
  */
 public class Voronoi {
-    private static final double MAX_DIM = 100;
-    private static final double MIN_DIM = 10;
+    private double MAX_DIM = -Double.MAX_VALUE;
+    private double MIN_DIM = Double.MAX_VALUE;
     private double sweepLoc;
     private final ArrayList<Point> sites;
     private final ArrayList<VoronoiEdge> edgeList;
@@ -32,9 +35,10 @@ public class Voronoi {
         arcs = new TreeMap<ArcKey, CircleEvent>();
 
         for (Point site : sites) {
-            if ((site.x > MAX_DIM || site.x < MIN_DIM) || (site.y > MAX_DIM || site.y < MIN_DIM))
-                throw new RuntimeException(String.format(
-                    "Invalid site in input, sites must be between %f and %f", MIN_DIM, MAX_DIM ));
+        	MAX_DIM = max(MAX_DIM, site.x);
+        	MAX_DIM = max(MAX_DIM, site.y);
+        	MIN_DIM = min(MIN_DIM, site.x);
+        	MIN_DIM = min(MIN_DIM, site.y);
             events.add(new Event(site));
         }
         sweepLoc = MAX_DIM;

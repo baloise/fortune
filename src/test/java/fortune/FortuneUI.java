@@ -22,15 +22,15 @@ public class FortuneUI {
 	private static void createAndShowGUI() {
 		JFrame frame = new JFrame("FortuneUI");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+		
 		Random rand = new Random(currentTimeMillis());
 		for (int i = 0; i < 20; i++) {
-			sites.add(new Point(rand.nextInt(90)+10, rand.nextInt(90)+10));
+			sites.add(new Point(rand.nextInt(490)+5, rand.nextInt(490)+5));
 		}
 		Voronoi voronoi = new Voronoi(sites);
 		
 		
-		JComponent emptyLabel = new JComponent(){
+		JComponent canvas = new JComponent(){
 			@Override
 			public void paint(Graphics g) {
 				Graphics2D g2 = (Graphics2D) g;
@@ -41,8 +41,8 @@ public class FortuneUI {
 				}
 			}
 		};
-		emptyLabel.setPreferredSize(new Dimension(175, 100));
-		frame.getContentPane().add(emptyLabel, BorderLayout.CENTER);
+		canvas.setPreferredSize(new Dimension(500, 500));
+		frame.getContentPane().add(canvas, BorderLayout.CENTER);
 
 		frame.pack();
 		frame.setVisible(true);
