@@ -10,8 +10,8 @@ import java.util.TreeSet;
  * Created by ajwerner on 12/23/13.
  */
 public class Voronoi {
-    private static final double MAX_DIM = 10;
-    private static final double MIN_DIM = -10;
+    private static final double MAX_DIM = 100;
+    private static final double MIN_DIM = 10;
     private double sweepLoc;
     private final ArrayList<Point> sites;
     private final ArrayList<VoronoiEdge> edgeList;
@@ -168,5 +168,14 @@ public class Voronoi {
             events.add(ce);
         }
     }
+
+	public ArrayList<Point> getSites() {
+		return sites;
+	}
+
+	public ArrayList<VoronoiEdge> getEdgeList() {
+		return edgeList;
+	}
+    
 }
 
