@@ -4,6 +4,7 @@ import static java.lang.Math.max;
 import static java.lang.Math.min;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.TreeMap;
@@ -13,10 +14,8 @@ import java.util.TreeSet;
  * Created by ajwerner on 12/23/13.
  */
 public class Voronoi {
-    private double MAX_DIM = -Double.MAX_VALUE;
-    private double MIN_DIM = Double.MAX_VALUE;
     private double sweepLoc;
-    private final ArrayList<Point> sites;
+    private final Collection<Point> sites;
     private final ArrayList<VoronoiEdge> edgeList;
     private HashSet<BreakPoint> breakPoints;
     private TreeMap<ArcKey, CircleEvent> arcs;
@@ -26,7 +25,7 @@ public class Voronoi {
         return sweepLoc;
     }
 
-    public Voronoi(ArrayList<Point> sites) {
+    public Voronoi(Collection<Point> sites) {
         // initialize data structures;
         this.sites = sites;
         edgeList = new ArrayList<VoronoiEdge>(sites.size());
@@ -34,14 +33,19 @@ public class Voronoi {
         breakPoints = new HashSet<BreakPoint>();
         arcs = new TreeMap<ArcKey, CircleEvent>();
 
-        for (Point site : sites) {
-        	MAX_DIM = max(MAX_DIM, site.x);
-        	MAX_DIM = max(MAX_DIM, site.y);
-        	MIN_DIM = min(MIN_DIM, site.x);
-        	MIN_DIM = min(MIN_DIM, site.y);
+        compute();
+    }
+
+	public void compute() {
+		 edgeList.clear();
+	     events.clear();
+	     breakPoints.clear();
+	     arcs.clear();
+	        
+		for (Point site : sites) {
             events.add(new Event(site));
         }
-        sweepLoc = MAX_DIM;
+        sweepLoc = Double.MAX_VALUE;
         do {
             Event cur = events.pollFirst();
             sweepLoc = cur.p.y;
@@ -54,11 +58,10 @@ public class Voronoi {
             }
         } while ((events.size() > 0));
 
-        this.sweepLoc = MIN_DIM; // hack to draw negative infinite points
         for (BreakPoint bp : breakPoints) {
             bp.finish();
         }
-    }
+	}
 
     private void handleSiteEvent(Event cur) {
         // Deal with first point case
@@ -173,7 +176,7 @@ public class Voronoi {
         }
     }
 
-	public ArrayList<Point> getSites() {
+	public Collection<Point> getSites() {
 		return sites;
 	}
 
